@@ -1,0 +1,71 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package test;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+class TComp implements Comparator<String> {
+public int compare(String a, String b) {
+int i, j, k;
+String aStr, bStr;
+aStr = a;
+bStr = b;
+// Find index of beginning of last name.
+i = aStr.lastIndexOf(' ')+1;
+j = bStr.lastIndexOf(' ')+1;
+k = aStr.substring(i).compareTo(bStr.substring(j));
+if(k==0) // last names match, check entire name
+return aStr.compareTo(bStr);
+else
+return k;
+}
+// No need to override equals.
+}
+
+public class Test {
+
+    public static void main(String args[]) {
+// Create a hash map.
+        Map<String, Double> hm = new TreeMap<String, Double>(new TComp());
+// Put elements to the map
+        hm.put("Ajay Acharya", 111.4);
+        hm.put("Amit Kumar", 4449.6);
+        hm.put("Kishore Kumar", 7676.1);
+        hm.put("Honey Singh", 1212.6);
+        hm.put("Amit Trivedi", 1212.6);
+        hm.put("Ramesh Medar", 8855.1);
+// Get a set of the entries.
+        Set<Map.Entry<String, Double>> set = hm.entrySet();
+// Display the set.
+        for (Map.Entry<String, Double> me : set) {
+            System.out.print(me.getKey() + ": ");
+            System.out.println(me.getValue());
+        }
+        System.out.println();
+// Deposit 1000 into Ajay Acharya's account.
+        double balance = hm.get("Ajay Acharya");
+        hm.put("Ajay Acharya", balance + 1000);
+        System.out.println("Ajay Acharya's new balance: "
+                + hm.get("Ajay Acharya"));
+
+    }
+}
+
